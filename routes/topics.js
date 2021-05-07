@@ -25,12 +25,39 @@ const topicsSQL = `
     t.topic_summary
 `
 
+const lacturesSQL = `
+  select
+    a.author_firstname,
+    a.author_lastname,
+    l.lecture_id,
+    l.lecture_title,
+    l.lecture_audio,
+    l.lecture_summary,
+    l.lecture_durition,
+    l.lecture_size,
+    l.lecture_islike
+  from
+    lectures as l
+  join
+    topics as t on t.topic_id = l.topic_id and l.topic_id = $1
+  join
+    authors as a on a.author_id = t.author_id
+`
+
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
 
   const topics = await rows(topicsSQL)
 
   res.send(topics);
+});
+
+router.get('/:id', async function(req, res, next) {
+
+
+  const lactures = await rows(lacturesSQL, req.params.id)
+
+  res.send(lactures);
 });
 
 module.exports = router;
