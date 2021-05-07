@@ -23,7 +23,24 @@ const rows = async (SQL, ...params) => {
   finally {
     connect.release()
   }
+}
 
+const row = async (SQL, ...params) => {
+
+	const client = await pool.connect()
+
+	try {
+		const { rows: [row] } = await client.query(SQL, params)
+
+		return row
+	}
+	catch(e) {
+		throw e
+	}
+	finally {
+		client.release()
+	}
 }
 
 module.exports.rows = rows
+module.exports.row = row

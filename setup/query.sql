@@ -1,5 +1,4 @@
---/topics Query--
-
+--/get topics Query--
 select
   a.author_lastname,
   a.author_firstname,
@@ -21,8 +20,14 @@ group by
   t.topic_summary
 ;
 
---/lectures Query--
 
+-- POST topic query--
+insert into topics(author_id, topic_title, topic_summary) values
+(2, 'Siyrat darslari', 'Siyrat haqida 63ta dars')
+;
+
+
+--/lectures Query--
 select
   a.author_firstname,
   a.author_lastname,
