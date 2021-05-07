@@ -3,16 +3,16 @@ var router = express.Router();
 
 const { rows } = require("../util/database")
 
-const topicsSQL = `
-select * from topics
+const lacturesSQL = `
+select * from lectures
 `
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
 
-  const topics = await rows(topicsSQL)
+  const lectures = await rows(lacturesSQL)
 
-  res.send(topics);
+  res.send(lectures);
 });
 
 module.exports = router;
